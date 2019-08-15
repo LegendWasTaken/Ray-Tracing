@@ -1,14 +1,18 @@
-class point {
+class Point {
     constructor(x, y, fov){
         this.x = x;
         this.y = y;
+        this.rays = [];
+        for(let a=0; a<360; a++){
+            this.rays.push(new Ray(this.x, this.y, a*0.1));
+        }
         this.fov = fov;
         this.a = 0 - fov/2;
     }
 
     show(){
         fill(255);
-        circle(this.x, this.y, 20);
+        circle(this.x, this.y, 10);
     }
 
     moveTo(x, y){
