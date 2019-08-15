@@ -1,8 +1,8 @@
 class Ray {
-    constructor(x, y, angle){
+    constructor(x, y, angle, strengh){
         this.s = { x: x, y: y}
         this.d = p5.Vector.fromAngle(angle);
-        this.strengh = 100;
+        this.a = strengh;
     }
 
     cast(wall){ // Uses math from wkipedia... Not sure how this works but it does
