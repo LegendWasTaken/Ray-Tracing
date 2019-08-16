@@ -10,35 +10,34 @@ class Point {
         this.a = 0 - fov/2;
     }
 
-    b(walls){
-    //for(let i=0; i<360; i+=.1){
+    cast(walls){
+        for(let i=0; i<360; i+=.1){
         
-        let ray = new Ray(this.x, this.y, radians(360), 100); // Creating the new ray with the angle
-
-        let shortestRay = null; // Shortest ray is used so that when there are multiple walls, it only renders the shortest one
-        let _point = null;
-        // For every ray that there is go and cast that ray through every single wall
-        for(let j=0; j<walls.length; j++){
-
-            // Running the ray cast function and caching the result ( Even if it isn't a point )
-            let cp = ray.cast(walls[j]);
-            if(cp){
-                /* 
-                 * If there is a point of intersection check if it was the shortest distance
-                 * if it was the shortest distance, set the shortest ray to the current ray
-                 */
-                if(shortestRay == null || cp.l < shortestRay.l){
-                    _point = cp;
-                    shortestRay = ray;
+            let ray = new Ray(view.x, view.y, radians(i)); // Creating the new ray with the angle
+    
+            let shortestRay = null; // Shortest ray is used so that when there are multiple walls, it only renders the shortest one
+    
+            // For every ray that there is go and cast that ray through every single wall
+            for(let j=0; j<walls.length; j++){
+    
+                // Running the ray cast function and caching the result ( Even if it isn't a point )
+                let cp = ray.cast(walls[j]);
+                if(cp){
+    
+                    /* 
+                     * If there is a point of intersection check if it was the shortest distance
+                     * if it was the shortest distance, set the shortest ray to the current ray
+                     */
+                    if(shortestRay == null || cp.l < shortestRay.l){
+                        shortestRay = cp;
+                    }
                 }
             }
+            if(shortestRay){ // If the shortest ray exists render it
+                stroke(10, 10, 255);
+                line(view.x, view.y, shortestRay.x, shortestRay.y);
+            }
         }
-        if(shortestRay){ // If the shortest ray exists render it
-            stroke(10, 10, 255);
-            line(this.x, this.y, _point.x, _point.y);
-        }
-        console.log(ray.b);
-    //}
     }
 
     show(){
