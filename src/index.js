@@ -19,33 +19,33 @@ function draw(){
      * For every angle in the field of view
      * go through and make a ray with a radian of that "index/angle" 
      */
-    for(let i=0; i<360; i+=.1){
+    view.b(walls);
+    // //for(let i=0; i<360; i+=.1){
         
-        let ray = new Ray(view.x, view.y, radians(i)); // Creating the new ray with the angle
+    //     let ray = new Ray(view.x, view.y, radians(0)); // Creating the new ray with the angle
 
-        let shortestRay = null; // Shortest ray is used so that when there are multiple walls, it only renders the shortest one
+    //     let shortestRay = null; // Shortest ray is used so that when there are multiple walls, it only renders the shortest one
 
-        // For every ray that there is go and cast that ray through every single wall
-        for(let j=0; j<walls.length; j++){
+    //     // For every ray that there is go and cast that ray through every single wall
+    //     for(let j=0; j<walls.length; j++){
 
-            // Running the ray cast function and caching the result ( Even if it isn't a point )
-            let cp = ray.cast(walls[j]);
-            if(cp){
-
-                /* 
-                 * If there is a point of intersection check if it was the shortest distance
-                 * if it was the shortest distance, set the shortest ray to the current ray
-                 */
-                if(shortestRay == null || cp.l < shortestRay.l){
-                    shortestRay = cp;
-                }
-            }
-        }
-        if(shortestRay){ // If the shortest ray exists render it
-            stroke(10, 10, 255);
-            line(view.x, view.y, shortestRay.x, shortestRay.y);
-        }
-    }
+    //         // Running the ray cast function and caching the result ( Even if it isn't a point )
+    //         let cp = ray.cast(walls[j]);
+    //         if(cp){
+    //             /* 
+    //              * If there is a point of intersection check if it was the shortest distance
+    //              * if it was the shortest distance, set the shortest ray to the current ray
+    //              */
+    //             if(shortestRay == null || cp.l < shortestRay.l){
+    //                 shortestRay = cp;
+    //             }
+    //         }
+    //     }
+    //     if(shortestRay){ // If the shortest ray exists render it
+    //         stroke(10, 10, 255);
+    //         line(view.x, view.y, shortestRay.x, shortestRay.y);
+    //     }
+    // //}
     for(let i=0; i<walls.length; i++){ // Simple for loop going through every single wall and rendering it
         walls[i].show();
     }
