@@ -2,18 +2,14 @@ class Point {
     constructor(x, y, fov){
         this.x = x;
         this.y = y;
-        this.rays = [];
-        for(let a=0; a<360; a++){
-            this.rays.push(new Ray(this.x, this.y, a*0.1));
-        }
         this.fov = fov;
         this.a = 0 - fov/2;
     }
 
     cast(walls){
-        for(let i=0; i<360; i+=.1){
+        for(let i=0; i<360; i+=360){
         
-            let ray = new Ray(view.x, view.y, radians(i)); // Creating the new ray with the angle
+            let ray = new Ray(view.x, view.y, radians(180), 100); // Creating the new ray with the angle
     
             let shortestRay = null; // Shortest ray is used so that when there are multiple walls, it only renders the shortest one
     
@@ -23,7 +19,6 @@ class Point {
                 // Running the ray cast function and caching the result ( Even if it isn't a point )
                 let cp = ray.cast(walls[j]);
                 if(cp){
-    
                     /* 
                      * If there is a point of intersection check if it was the shortest distance
                      * if it was the shortest distance, set the shortest ray to the current ray
@@ -34,8 +29,8 @@ class Point {
                 }
             }
             if(shortestRay){ // If the shortest ray exists render it
-                stroke(10, 10, 255);
-                line(view.x, view.y, shortestRay.x, shortestRay.y);
+                ray.b.push(shortestRay);
+                ray.render();
             }
         }
     }

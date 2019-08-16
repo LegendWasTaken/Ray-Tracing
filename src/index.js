@@ -5,11 +5,21 @@ let fovOffset = [];
 
 function setup(){
     createCanvas(1280, 800);
-    walls.push(new Border(1000, 140, 1000, 600));
-    for(let i=0; i<10; i++){
-        // Used to create a bunch of random walls yaknow
-        walls.push(new Border(random(0, 1280), random(0, 800), random(0, 1280), random(0, 800)))
-    }
+
+    // Making the walls around the thing so that it looks nicer
+    walls.push(new Border(1, 1, width-2, 1, 100), new Border(1, 1, 1, height-2, 100), new Border(width-2, 1, width-2, height-2, 100), new Border(1, height-2, width-2, height-2));
+
+    // Making a box
+
+    // 400 
+
+    walls.push(new Border(800, 225, 800, 525, 100));
+    walls.push(new Border(400, 225, 400, 425, 0));
+
+    // for(let i=0; i<10; i++){
+    //     // Used to create a bunch of random walls yaknow
+    //     walls.push(new Border(random(0, 1280), random(0, 800), random(0, 1280), random(0, 800)))
+    // }
 }
 
 function draw(){
